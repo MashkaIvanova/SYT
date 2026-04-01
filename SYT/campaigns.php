@@ -1,0 +1,106 @@
+<?php
+  $userName = "Мария Сергеевна";
+  $status = "Premium Аккаунт";
+  $currentPage = basename($_SERVER['PHP_SELF']);
+
+  $campaigns = [
+      ["title" => "Новогодний оффер", "status" => "active", "scans" => 12400, "icon" => "🎄", "date" => "До 15.01"],
+      ["title" => "Весенняя распродажа", "status" => "paused", "scans" => 5100, "icon" => "🌸", "date" => "Приостановлено"],
+      ["title" => "QR-код для ТВ-3", "status" => "active", "scans" => 850, "icon" => "📺", "date" => "Бессрочно"],
+      ["title" => "Акция: Кофе 1+1", "status" => "active", "scans" => 3200, "icon" => "☕", "date" => "До 01.04"]
+  ];
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYT | Кампании</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ПРИНУДИТЕЛЬНОЕ УМЕНЬШЕНИЕ ИКОНОК */
+        nav a img.nav-icon,
+        .sidebar nav a img {
+            width: 25px !important;
+            height: 25px !important;
+            min-width: 25px !important;
+            max-width: 25px !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+        
+        nav a {
+            padding: 10px 14px !important;
+            gap: 10px !important;
+        }
+        /* Делаем иконки белыми */
+.nav-icon {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* При наведении можно сделать с акцентным цветом */
+nav a:hover .nav-icon {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--accent)) !important;
+}
+
+/* Активная страница - иконка тоже белая с подсветкой */
+nav a.active .nav-icon {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--accent)) !important;
+}
+    </style>
+</head>
+<body>
+    <div class="glass-container">
+        <aside class="sidebar">
+            <div class="logo">SYT<span>.tv</span></div>
+            <nav>
+                <a href="index.php" class="<?php echo $currentPage == 'index.php' ? 'active' : ''; ?>">
+                    <img src="dashboard.png" class="nav-icon" alt=""> Дашборд
+                </a>
+                <a href="campaigns.php" class="<?php echo $currentPage == 'campaigns.php' ? 'active' : ''; ?>">
+                    <img src="campaigns.png" class="nav-icon" alt=""> Кампании
+                </a>
+                <a href="analytics.php" class="<?php echo $currentPage == 'analytics.php' ? 'active' : ''; ?>">
+                    <img src="analytics.png" class="nav-icon" alt=""> Аналитика
+                </a>
+                <a href="settings.php" class="<?php echo $currentPage == 'settings.php' ? 'active' : ''; ?>">
+                    <img src="settings.png" class="nav-icon" alt=""> Настройки
+                </a>
+                <a href="support.php" class="<?php echo $currentPage == 'support.php' ? 'active' : ''; ?>">
+                    <img src="support.png" class="nav-icon" alt=""> Поддержка
+                </a>
+            </nav>
+            <div class="user-card">
+                <p><?php echo $userName; ?></p>
+                <span><?php echo $status; ?></span>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h1>Ваши кампании</h1>
+                <button class="glass-btn">+ Создать новую</button>
+            </header>
+
+            <div class="campaigns-grid">
+                <?php foreach ($campaigns as $camp): ?>
+                <div class="campaign-card">
+                    <div style="font-size: 40px; margin-bottom: 12px;"><?php echo $camp['icon']; ?></div>
+                    <span class="status-pill <?php echo ($camp['status'] == 'active') ? 'status-active' : 'status-paused'; ?>">
+                        <?php echo ($camp['status'] == 'active') ? 'В эфире' : 'На паузе'; ?>
+                    </span>
+                    <h3 style="margin: 12px 0 8px 0; font-size: 25px; font-weight: 600;"><?php echo $camp['title']; ?></h3>
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; opacity: 0.6; margin-top: 16px;">
+                        <span>📊 Сканов: <b><?php echo number_format($camp['scans'], 0, '.', ' '); ?></b></span>
+                        <span>📅 <?php echo $camp['date']; ?></span>
+                    </div>
+                    <button class="glass-btn" style="width: 100%; margin-top: 20px; background: rgba(255,255,255,0.03); color: white; border: 1px solid var(--glass-border);">
+                        ⚙️ Настройки
+                    </button>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<?php
+  $userName = "Мария Сергеевна";
+  $status = "Premium Аккаунт";
+  $currentPage = basename($_SERVER['PHP_SELF']);
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>SYT | Аналитика</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ПРИНУДИТЕЛЬНОЕ УМЕНЬШЕНИЕ ИКОНОК */
+        nav a img.nav-icon,
+        .sidebar nav a img {
+            width: 25px !important;
+            height: 25px !important;
+            min-width: 25px !important;
+            max-width: 25px !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+        
+        nav a {
+            padding: 10px 14px !important;
+            gap: 10px !important;
+        }
+        /* Делаем иконки белыми */
+.nav-icon {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* При наведении можно сделать с акцентным цветом */
+nav a:hover .nav-icon {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--accent)) !important;
+}
+
+/* Активная страница - иконка тоже белая с подсветкой */
+nav a.active .nav-icon {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px var(--accent)) !important;
+}
+    </style>
+</head>
+<body>
+    <div class="glass-container">
+        <aside class="sidebar">
+            <div class="logo">SYT<span>.tv</span></div>
+            <nav>
+                <a href="index.php" class="<?php echo $currentPage == 'index.php' ? 'active' : ''; ?>">
+                    <img src="dashboard.png" class="nav-icon" alt=""> Дашборд
+                </a>
+                <a href="campaigns.php" class="<?php echo $currentPage == 'campaigns.php' ? 'active' : ''; ?>">
+                    <img src="campaigns.png" class="nav-icon" alt=""> Кампании
+                </a>
+                <a href="analytics.php" class="<?php echo $currentPage == 'analytics.php' ? 'active' : ''; ?>">
+                    <img src="analytics.png" class="nav-icon" alt=""> Аналитика
+                </a>
+                <a href="settings.php" class="<?php echo $currentPage == 'settings.php' ? 'active' : ''; ?>">
+                    <img src="settings.png" class="nav-icon" alt=""> Настройки
+                </a>
+                <a href="support.php" class="<?php echo $currentPage == 'support.php' ? 'active' : ''; ?>">
+                    <img src="support.png" class="nav-icon" alt=""> Поддержка
+                </a>
+            </nav>
+            <div class="user-card">
+                <p><?php echo $userName; ?></p>
+                <span><?php echo $status; ?></span>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h1>Глубокая аналитика</h1>
+                <button class="glass-btn">📊 Экспорт</button>
+            </header>
+
+            <div class="glass-card" style="padding: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <span style="opacity: 0.6;">Динамика сканирований</span>
+                    <span style="font-size: 12px; opacity: 0.5;">Последние 7 дней</span>
+                </div>
+                <div style="display: flex; align-items: flex-end; gap: 12px; height: 220px;">
+                    <div style="flex:1; background: var(--accent); height: 40%; border-radius: 8px 8px 0 0; opacity: 0.6;"></div>
+                    <div style="flex:1; background: var(--accent); height: 70%; border-radius: 8px 8px 0 0;"></div>
+                    <div style="flex:1; background: var(--accent); height: 55%; border-radius: 8px 8px 0 0; opacity: 0.7;"></div>
+                    <div style="flex:1; background: var(--accent); height: 90%; border-radius: 8px 8px 0 0;"></div>
+                    <div style="flex:1; background: var(--accent); height: 30%; border-radius: 8px 8px 0 0; opacity: 0.5;"></div>
+                    <div style="flex:1; background: var(--accent); height: 75%; border-radius: 8px 8px 0 0;"></div>
+                    <div style="flex:1; background: var(--accent); height: 48%; border-radius: 8px 8px 0 0; opacity: 0.6;"></div>
+                </div>
+            </div>
+
+            <div class="stats-grid" style="margin-top: 24px;">
+                <div class="glass-card">
+                    <span>ROI</span>
+                    <h2>+24%</h2>
+                    <div class="progress-bar"><div style="width: 68%"></div></div>
+                </div>
+                <div class="glass-card">
+                    <span>Отказы</span>
+                    <h2>1.2%</h2>
+                    <div class="progress-bar"><div style="width: 12%"></div></div>
+                </div>
+                <div class="glass-card">
+                    <span>Устройства</span>
+                    <h2>Mobile 87%</h2>
+                    <div class="progress-bar"><div style="width: 87%"></div></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

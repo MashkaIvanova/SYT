@@ -1,0 +1,407 @@
+/* =========================================
+   1. ОБЩИЕ НАСТРОЙКИ (СБРОС И ПЕРЕМЕННЫЕ)
+   ========================================= */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent: #ff0080;
+    --sidebar-bg: rgba(0, 0, 0, 0.25);
+    --success: #00ff80;
+    --warning: #ffff00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: radial-gradient(circle at top left, #302b63, #0f0c29, #050505);
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Фоновые круги */
+body::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: var(--accent);
+    filter: blur(180px);
+    top: -100px;
+    left: -100px;
+    opacity: 0.12;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: #00aaff;
+    filter: blur(150px);
+    bottom: -80px;
+    right: -80px;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* =========================================
+   2. ОСНОВНОЙ КОРПУС
+   ========================================= */
+.glass-container {
+    width: 1150px;
+    height: 780px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-border);
+    border-radius: 40px;
+    display: flex;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+/* =========================================
+   3. БОКОВОЕ МЕНЮ
+   ========================================= */
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--glass-border);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+/* НАВИГАЦИЯ */
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: auto;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+nav a:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+nav a.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Иконки в навигации */
+.nav-icon {
+    width: 25px !important;
+    height: 25px !important;
+    min-width: 25px;
+    max-width: 25px;
+    object-fit: contain;
+    filter: brightness(0) invert(0.6);
+    transition: all 0.3s ease;
+}
+
+nav a:hover .nav-icon,
+nav a.active .nav-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* КАРТОЧКА ПОЛЬЗОВАТЕЛЯ */
+.user-card {
+    margin-top: 30px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.user-card p {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.user-card span {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* =========================================
+   4. ОСНОВНОЙ КОНТЕНТ
+   ========================================= */
+.content {
+    flex: 1;
+    padding: 40px 48px;
+    overflow-y: auto;
+}
+
+.content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* КНОПКИ */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f0c29;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.glass-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    background: white;
+}
+
+/* СЕТКИ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* КАРТОЧКИ */
+.glass-card,
+.campaign-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover,
+.campaign-card:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-3px);
+}
+
+.glass-card span {
+    font-size: 12px;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.glass-card h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+/* ПРОГРЕСС-БАР */
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.progress-bar div {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 10px;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+/* =========================================
+   5. ТАБЛИЦА (ИСПРАВЛЕНА)
+   ========================================= */
+.glass-table-container {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid var(--glass-border);
+}
+
+.glass-table-container h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.glass-table th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.5;
+    padding-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.glass-table td {
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Выравнивание колонок */
+.glass-table th:first-child,
+.glass-table td:first-child {
+    text-align: left;
+    width: 50%;
+}
+
+.glass-table th:nth-child(2),
+.glass-table td:nth-child(2) {
+    text-align: center;
+    width: 25%;
+}
+
+.glass-table th:last-child,
+.glass-table td:last-child {
+    text-align: right;
+    width: 25%;
+}
+
+/* СТАТУСЫ */
+.status-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-active {
+    background: rgba(0, 255, 128, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(0, 255, 128, 0.2);
+}
+
+.status-paused {
+    background: rgba(255, 255, 0, 0.1);
+    color: var(--warning);
+    border: 1px solid rgba(255, 255, 0, 0.2);
+}
+
+/* ИНПУТЫ */
+.glass-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    padding: 12px 16px;
+    border-radius: 14px;
+    color: white;
+    outline: none;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.glass-input:focus {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ФОРМЫ */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 8px;
+}
+
+/* АДАПТИВ */
+@media (max-width: 1000px) {
+    .glass-container {
+        width: 95%;
+        height: 90%;
+    }
+    
+    .sidebar {
+        width: 240px;
+        min-width: 240px;
+        padding: 30px 20px;
+    }
+    
+    .content {
+        padding: 30px;
+    }
+    
+    .stats-grid {
+        gap: 15px;
+    }
+    
+    .campaigns-grid {
+        grid-template-columns: 1fr;
+    }
+}
